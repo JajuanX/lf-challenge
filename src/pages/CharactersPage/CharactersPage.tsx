@@ -50,9 +50,11 @@ const CharactersPage = () => {
 	};
 
 	return (
-		<>
-			<h1>Characters Page</h1>
-		</>
+		<main className="characters">
+			<h1 className="characters__title">Disney Characters Page</h1>
+			{loading && <p className="characters__loading">Loading...</p>}
+			{error && <p className="characters__error">{error}</p>}
+
 			<section className="characters__list">
 				{characters.map((character) => {
 					return (
