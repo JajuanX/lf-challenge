@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { disneyService } from "../../services/disney-service/disney.service";
 import "./CharactersPage.scss";
-import { Link } from "react-router-dom";
+import CharacterList from "../../components/CharacterList/CharacterList";
+import PaginationControls from "../../components/PaginationControls/PaginationControls";
 
 type Character = {
 	_id: string;
@@ -54,49 +55,13 @@ const CharactersPage = () => {
 			{loading && <p className="characters__loading">Loading...</p>}
 			{error && <p className="characters__error">{error}</p>}
 
-			<section className="characters__list">
-				{characters.map((character) => {
-					return (
-						<article className="characters__card" key={character._id}>
-							<Link
-								to={`/characters/${character._id}`}
-								className="characters_link"
-							>
-								{character.imageUrl ? (
-									<img
-										src={character.imageUrl}
-										alt={`Portrait of ${character.name}`}
-										className="characters__image"
-									/>
-								) : (
-									<div className="characters__image characters__image--placeholder"></div>
-								)}
-								<h2 className="characters__name">{character.name}</h2>
-							</Link>
-						</article>
-					);
-				})}
-			</section>
-
-			<nav className="characters__pagination">
-				<button 
-					className="characters__button"
-					onClick={() => handlePrevious()}
-					disabled={page === 1}
-				>
-					Previous
-				</button>
-				<span className="characters__page">
-					Page {page}
-				</span>
-				<button 
-					className="characters__button"
-					onClick={() => handleNext()}
-					disabled={totalPages ? page >= totalPages : false}	
-				>
-					Next
-				</button>
-			</nav>
+			<CharacterList characters={characters} />
+			<PaginationControls 
+				page={page}
+				totalPages={totalPages}
+				onNext={handleNext}
+				onPrev={handlePrevious}
+			/>
 		</main>
 	);
 };
