@@ -1,0 +1,14 @@
+.characters {
+	padding: 1rem;
+
+	&__title {
+		text-align: center;
+	}
+
+	&__loading, &__error {
+		text-align: center;
+		font-weight: bold;
+		color: #d9534f;
+	}
+	
+}

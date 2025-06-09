@@ -1,0 +1,30 @@
+import CharacterCard from "../CharacterCard/CharacterCard"
+import './CharacterList.scss'
+type Character = {
+	_id: string
+	name: string
+	imageUrl?: string
+}
+
+type Props = {
+	characters: Character[]
+}
+
+const CharacterList = ({characters} : Props) => {
+	return (
+		<section className="characters">
+			{characters.map((character) => {
+				return (
+					<CharacterCard
+						key={character._id}
+						id={character._id}
+						name={character.name}
+						imageUrl={character.imageUrl}
+					/>
+				);
+			})}
+		</section>
+	);
+};
+
+export default CharacterList;
