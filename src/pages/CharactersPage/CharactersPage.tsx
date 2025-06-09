@@ -22,8 +22,7 @@ const CharactersPage = () => {
 			setError("");
 
 			try {
-				const response = await disneyService.getCharacters(page);
-				
+				const response = await disneyService.getCharacters(page);				
 				setCharacters(response.data);
 				setTotalPages(response.info.totalPages);
 			} catch (err) {
