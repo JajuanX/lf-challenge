@@ -1,28 +1,17 @@
-import { useEffect } from "react";
-import { disneyService } from "./services/disney-service/disney.service.js";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import CharactersPage from "./pages/CharactersPage/CharactersPage";
+import CharacterDetailPage from "./pages/CharacterDetailPage/CharacterDetailPage";
 
 function App() {
-	useEffect(() => {
-		const getCharacters = async () => {
-			const characters = await disneyService.getCharacters()
-			console.log(characters);
-		}
 
-		getCharacters()
-
-		const getCharacterById = async (id: string | number) => {
-			const character = await disneyService.getCharacterById(id);
-			console.log(character);
-			
-		}
-
-		getCharacterById('112');
-	}, [])
 	return (
-		<>
-			<h1>Disney Characters</h1>
-		</>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<CharactersPage />} />
+				<Route path="/characters/:id" element={<CharacterDetailPage />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
