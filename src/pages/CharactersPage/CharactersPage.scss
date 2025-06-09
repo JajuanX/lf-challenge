@@ -1,0 +1,78 @@
+.characters {
+	padding: 1rem;
+
+	&__title {
+		text-align: center;
+	}
+
+	&__loading, &__error {
+		text-align: center;
+		font-weight: bold;
+		color: #d9534f;
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: center;
+	}
+
+	&__card {
+		width: 10rem;
+		flex-shrink: 0;
+		background-color: #fff;
+		border: 1px solid #ddd;
+		text-align: center;
+		padding: 1rem;
+		transition: transform 0.2s ease;
+
+		&:hover {
+			transform: translateY(-4px);
+		}
+	}
+
+	&__link {
+		text-decoration: none;
+	}
+
+	&__image {
+		max-width: 100%;
+		height: auto;
+		border-radius: 4px;
+
+	}
+
+	&__name {
+		margin-top: .5rem;
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	&__pagination {
+		margin-top: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	&__button {
+		background-color: #007bff;
+		color:  white;
+		border: none;
+		padding: .5rem 1rem;
+		border-radius: 4px;
+		cursor: pointer;
+
+		&:disabled {
+			background-color: #ccc;
+			cursor: not-allowed;
+		}
+	}
+
+	&__page { 
+		font-weight: bold;
+	}
+	
+}
