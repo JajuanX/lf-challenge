@@ -10,6 +10,12 @@ type Character = {
 };
 
 const CharactersPage = () => {
+	const [characters, setCharacters] = useState<Character[]>([]);
+	const [page, setPage] = useState(1);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
+	const [totalPages, setTotalPages] = useState<number | null>(null);
+
 	useEffect(() => {
 		const fetchCharacters = async () => {
 			setLoading(true);
