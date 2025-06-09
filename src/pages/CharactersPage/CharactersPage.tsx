@@ -9,13 +9,23 @@ type Character = {
 
 const CharactersPage = () => {
 	useEffect(() => {
-		const getCharacters = async () => {
-			const characters = await disneyService.getCharacters();
-			console.log(characters);
+		const fetchCharacters = async () => {
+			setLoading(true);
+			setError("");
+
+			try {
+				const response = await disneyService.getCharacters(page);
+				
+				setCharacters(response.data);
+				setTotalPages(response.info.totalPages);
+			} catch (err) {
+				setError("Failed to load characters");
+				console.error(err);
+			} finally {
+				setLoading(false);
+			}
 		};
 
-		getCharacters();
-	}, []);
 
 	return (
 		<>
