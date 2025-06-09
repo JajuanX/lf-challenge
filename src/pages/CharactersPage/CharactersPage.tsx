@@ -1,6 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { disneyService } from "../../services/disney-service/disney.service";
 import "./CharactersPage.scss";
+import { Link } from "react-router-dom";
+
 type Character = {
 	_id: string;
 	name: string;
