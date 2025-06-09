@@ -54,6 +54,27 @@ const CharactersPage = () => {
 					);
 				})}
 			</section>
+
+			<nav className="characters__pagination">
+				<button 
+					className="characters__button"
+					onClick={() => handlePrevious()}
+					disabled={page === 1}
+				>
+					Previous
+				</button>
+				<span className="characters__page">
+					Page {page}
+				</span>
+				<button 
+					className="characters__button"
+					onClick={() => handleNext()}
+					disabled={totalPages ? page >= totalPages : false}	
+				>
+					Next
+				</button>
+			</nav>
+		</main>
 	);
 };
 
