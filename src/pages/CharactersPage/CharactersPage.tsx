@@ -31,6 +31,29 @@ const CharactersPage = () => {
 		<>
 			<h1>Characters Page</h1>
 		</>
+			<section className="characters__list">
+				{characters.map((character) => {
+					return (
+						<article className="characters__card" key={character._id}>
+							<Link
+								to={`/characters/${character._id}`}
+								className="characters_link"
+							>
+								{character.imageUrl ? (
+									<img
+										src={character.imageUrl}
+										alt={`Portrait of ${character.name}`}
+										className="characters__image"
+									/>
+								) : (
+									<div className="characters__image characters__image--placeholder"></div>
+								)}
+								<h2 className="characters__name">{character.name}</h2>
+							</Link>
+						</article>
+					);
+				})}
+			</section>
 	);
 };
 
