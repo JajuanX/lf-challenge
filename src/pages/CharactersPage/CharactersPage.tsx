@@ -26,6 +26,20 @@ const CharactersPage = () => {
 			}
 		};
 
+		fetchCharacters();
+	}, [page]);
+
+	const handleNext = () => {
+		if (totalPages && page < totalPages) {
+			setPage((prevValue) => prevValue + 1);
+		}
+	};
+
+	const handlePrevious = () => {
+		if (page > 1) {
+			setPage((prevValue) => prevValue - 1);
+		}
+	};
 
 	return (
 		<>
