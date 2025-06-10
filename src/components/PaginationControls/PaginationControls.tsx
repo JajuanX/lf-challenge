@@ -7,6 +7,15 @@ type Props = {
 	onPrev: () => void;
 };
 
+/**
+ * Pagination controls for navigating pages.
+ * @param {Object} props
+ * @param {number} props.page - The current page number.
+ * @param {number | null} props.totalPages - Total number of pages.
+ * @param {Function} props.onNext - Callback for the Next button.
+ * @param {Function} props.onPrev - Callback for the Previous button.
+ */
+
 const PaginationControls = ({ page, totalPages, onNext, onPrev }: Props) => {
 	return (
 		<nav className="pagination">
