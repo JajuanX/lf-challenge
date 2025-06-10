@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { disneyService } from "../../services/disney-service/disney.service";
 import { Link, useParams } from "react-router-dom";
 import './CharacterDetailPage.scss'
+import CharacterDetailsCard from "../../components/CharacterDetailsCard/CharacterDetailsCard";
 
 type Character = {
 	_id: string;
@@ -29,9 +30,7 @@ const CharacterDetailPage = () => {
 				setLoading(true);
 				setError("");
 
-				const response = await disneyService.getCharacterById(id);
-				console.log(response.data);
-				
+				const response = await disneyService.getCharacterById(id);				
 				setCharacter(response.data);
 			} catch (error) {
 				setError("Failed to load Character");

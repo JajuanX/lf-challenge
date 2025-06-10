@@ -9,18 +9,18 @@ type Props = {
 
 const CharacterCard = ({id, name, imageUrl} : Props) => {
 	return (
-		<article className="card" key={id}>
-			<Link to={`/characters/${id}`} className="card__link">
+		<article className="character-card" key={id}>
+			<Link to={`/characters/${id}`} className="character-card__link">
 				{imageUrl ? (
 					<img
 						src={imageUrl}
 						alt={`Portrait of ${name}`}
-						className="card__image"
+						className="character-card__image"
 					/>
 				) : (
-					<div className="card__image card__image--placeholder"></div>
+					<div className="character-card__image character-card__image--placeholder"></div>
 				)}
-				<h2 className="card__name">{name}</h2>
+				<h2 className="character-card__name">{name}</h2>
 			</Link>
 		</article>
 	);

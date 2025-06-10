@@ -11,6 +11,10 @@ type Character = {
 	imageUrl?: string;
 };
 
+/**
+ * CharactersPage shows a paginated list of Disney characters.
+ * Fetches data from the Disney API and manages pagination via query params.
+ */
 const CharactersPage = () => {
 	const [characters, setCharacters] = useState<Character[]>([]);
 	const [loading, setLoading] = useState(false);
@@ -54,18 +58,20 @@ const CharactersPage = () => {
 	};
 
 	return (
-		<main className="characters">
-			<h1 className="characters__title">Disney Characters Page</h1>
-			{loading && <p className="characters__loading">Loading...</p>}
-			{error && <p className="characters__error">{error}</p>}
-
-			<CharacterList characters={characters} />
+		<main className="characters-page">
+			<h1 className="characters-page__title">Disney Characters Page</h1>
+			
 			<PaginationControls 
 				page={page}
 				totalPages={totalPages}
 				onNext={handleNext}
 				onPrev={handlePrevious}
-			/>
+				/>
+
+			<CharacterList characters={characters} />
+
+			{loading && <p className="characters-page__loading">Loading...</p>}
+			{error && <p className="characters-page__error">{error}</p>}
 		</main>
 	);
 };
