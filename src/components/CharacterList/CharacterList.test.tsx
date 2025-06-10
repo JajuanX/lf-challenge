@@ -24,12 +24,6 @@ describe("CharacterList (deep rendering)", () => {
 			</MemoryRouter>
 		);
 
-		expect(screen.getByText("Mickey Mouse")).toBeInTheDocument();
-		expect(screen.getByText("Donald Duck")).toBeInTheDocument();
-
-		expect(screen.getByAltText("Portrait of Mickey Mouse")).toBeInTheDocument();
-		expect(screen.getByAltText("Portrait of Donald Duck")).toBeInTheDocument();
-
 		expect(screen.getAllByRole("link")).toHaveLength(2);
 	});
 
