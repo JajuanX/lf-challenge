@@ -1,4 +1,4 @@
-import './PaginationControls.scss'
+import "./PaginationControls.scss";
 
 type Props = {
 	page: number;
