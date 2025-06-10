@@ -3,6 +3,7 @@ import { disneyService } from "../../services/disney-service/disney.service";
 import "./CharactersPage.scss";
 import CharacterList from "../../components/CharacterList/CharacterList";
 import PaginationControls from "../../components/PaginationControls/PaginationControls";
+import { useSearchParams } from "react-router-dom";
 
 type Character = {
 	_id: string;
@@ -12,10 +13,13 @@ type Character = {
 
 const CharactersPage = () => {
 	const [characters, setCharacters] = useState<Character[]>([]);
-	const [page, setPage] = useState(1);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
 	const [totalPages, setTotalPages] = useState<number | null>(null);
+	const [searchParams, setSearchParams] = useSearchParams();
+	const rawPage = searchParams.get("page")
+	const pageParam = parseInt( rawPage ?? "", 10);
+	const page = Number.isNaN(pageParam) || pageParam < 1 ? 1 : pageParam;
 
 	useEffect(() => {
 		const fetchCharacters = async () => {
@@ -39,13 +43,13 @@ const CharactersPage = () => {
 
 	const handleNext = () => {
 		if (totalPages && page < totalPages) {
-			setPage((prevValue) => prevValue + 1);
+			setSearchParams({page: String(page + 1)});
 		}
 	};
 
 	const handlePrevious = () => {
 		if (page > 1) {
-			setPage((prevValue) => prevValue - 1);
+			setSearchParams({page: String(page - 1)});
 		}
 	};
 
