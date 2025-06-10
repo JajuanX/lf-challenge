@@ -16,6 +16,10 @@ type Character = {
 	sourceUrl?: string;
 };
 
+/**
+ * CharacterDetailPage shows info for a specific character by ID.
+ * Displays name, image, films, allies, and enemies.
+ */
 const CharacterDetailPage = () => {
 	const { id } = useParams<{ id: string }>();
 	const [character, setCharacter] = useState<Character | null>();
