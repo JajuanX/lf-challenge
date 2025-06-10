@@ -1,7 +1,9 @@
+@use "../../styles/variables" as *;
+
 .character-list {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1rem;
+	gap: $gap-md;
 	justify-content: center;
 	margin-top: 2rem;
 }

@@ -1,13 +1,21 @@
 import { Link } from "react-router-dom";
-import './CharacterCard.scss'
+import "./CharacterCard.scss";
 
 type Props = {
-	id: string
-	name: string
-	imageUrl?: string
-}
+	id: string;
+	name: string;
+	imageUrl?: string;
+};
 
-const CharacterCard = ({id, name, imageUrl} : Props) => {
+/**
+ * Displays a clickable card for a Disney character.
+ * Includes image (if available), name, and links to the character detail page.
+ *
+ * @param id - Unique identifier for the character.
+ * @param name - Character's display name.
+ * @param imageUrl - Optional image URL to show the character's portrait.
+ */
+const CharacterCard = ({ id, name, imageUrl }: Props) => {
 	return (
 		<article className="character-card" key={id}>
 			<Link to={`/characters/${id}`} className="character-card__link">

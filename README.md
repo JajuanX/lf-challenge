@@ -1,50 +1,37 @@
-# React + TypeScript + Vite
+# Disney Characters App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple single-page web application that displays Disney characters using the [Disney API](https://disneyapi.dev). Built with **React**, **TypeScript**, and styled using **SASS** with BEM naming convention.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🔍 Browse Disney characters with pagination
+- 📄 View detailed character pages with films, allies, enemies, and TV shows
+- 🔗 URL-based pagination (query param `?page=`)
+- ♿️ Accessible, semantic HTML structure
+- 🧪 Unit tested with **Vitest** and **React Testing Library**
+- 📦 Well-structured components and services
+- 🎨 Responsive design using Flexbox
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠 Tech Stack
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **Frontend:** React (with Vite), TypeScript, SASS (BEM)
+- **Routing:** React Router v6
+- **HTTP:** Axios
+- **Testing:** Vitest, React Testing Library
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+---
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🚀 Getting Started
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+# 1. Install dependencies
+npm install
+
+# 2. Start development server
+npm run dev
+
+# 3. Run tests
+npm run test

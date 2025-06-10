@@ -53,7 +53,7 @@ const CharacterDetailPage = () => {
 
 	return (
 		<main className="character-detail">
-			<Link to="/" className="character-detail__back">
+			<Link to="/characters" className="character-detail__back">
 				Back to List
 			</Link>
 			<CharacterDetailsCard character={character} />
