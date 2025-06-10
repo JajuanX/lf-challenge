@@ -44,72 +44,16 @@ const CharacterDetailPage = () => {
 		fetchCharacter();
 	}, [id]);
 
-	if (loading) return <p className="detail__loading">Loading...</p>;
-	if (error) return <p className="detail__error">{error}</p>;
+	if (loading) return <p className="character-detail__loading">Loading...</p>;
+	if (error) return <p className="character-detail__error">{error}</p>;
 	if (!character) return null;
 
 	return (
-		<main className="detail">
-			<Link to="/" className="detail__back">
+		<main className="character-detail">
+			<Link to="/" className="character-detail__back">
 				Back to List
 			</Link>
-			<section className="detail__card">
-				{character.imageUrl && (
-					<img
-						src={character.imageUrl}
-						alt={`Portrait of ${character.name}`}
-						className="detail__image"
-					/>
-				)}
-
-				<h1 className="detail__name">{character.name}</h1>
-
-				<section className="detail__section">
-					{character.films?.length > 0 && (
-						<article>
-							<h2 className="detail__label">Films</h2>
-							<ul className="detail__list">
-								{character.films?.map((film) => {
-									return <li className="detail__item" key={film}>{film}</li>;
-								})}
-							</ul>
-						</article>
-					)}
-					
-					{character.tvShows?.length > 0 && (
-						<article>
-							<h2 className="detail__label">TV Shows</h2>
-							<ul className="detail__list">
-								{character.tvShows?.map((show) => {
-									return <li className="detail__item" key={show}>{show}</li>;
-								})}
-							</ul>
-						</article>
-					)}
-
-					{character.allies?.length > 0 && (
-						<article>
-							<h2 className="detail__label">Allies</h2>
-							<ul className="detail__list">
-								{character.allies?.map((ally) => {
-									return <li className="detail__item" key={ally}>{ally}</li>;
-								})}
-							</ul>
-						</article>
-					)}
-
-					{character.enemies?.length > 0 && (
-						<article>
-							<h2 className="detail__label">Enemies</h2>
-							<ul className="detail__list">
-								{character.enemies?.map((enemy) => {
-									return <li className="detail__item" key={enemy}>{enemy}</li>;
-								})}
-							</ul>
-						</article>
-					)}
-				</section>
-			</section>
+			<CharacterDetailsCard character={character} />
 		</main>
 	);
 };
