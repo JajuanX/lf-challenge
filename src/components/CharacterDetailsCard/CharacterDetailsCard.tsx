@@ -1,23 +1,26 @@
-import CharacterImage from "../CharacterImage/CharacterImage"
-import CharacterSection from "../CharacterSection/CharacterSection"
-import './CharacterDetailsCard.scss'
+import CharacterImage from "../CharacterImage/CharacterImage";
+import CharacterSection from "../CharacterSection/CharacterSection";
+import "./CharacterDetailsCard.scss";
 
 type Props = {
 	character: {
-		name: string
-		imageUrl?: string
-		films: string[]
-		allies: string[]
-		enemies: string[]
-		tvShows: string[]
-	}
-}
+		name: string;
+		imageUrl?: string;
+		films: string[];
+		allies: string[];
+		enemies: string[];
+		tvShows: string[];
+	};
+};
 
-const CharacterDetailsCard = ({character}: Props) => {
-
+/**
+ * Displays detailed character info including image, films, allies, and enemies.
+ * @param character - The character object to display.
+ */
+const CharacterDetailsCard = ({ character }: Props) => {
 	return (
 		<section className="character-details-card">
-			<CharacterImage 
+			<CharacterImage
 				src={character.imageUrl}
 				alt={`Portrait of ${character.name}`}
 			/>
@@ -30,7 +33,7 @@ const CharacterDetailsCard = ({character}: Props) => {
 				<CharacterSection title="Enemies" items={character.enemies} />
 			</section>
 		</section>
-	)
-}
+	);
+};
 
-export default CharacterDetailsCard
+export default CharacterDetailsCard;
