@@ -1,0 +1,28 @@
+@use '../../styles/variables' as *;
+
+.pagination {
+	margin-top: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: $gap-md;
+
+	&__button {
+		background-color: #007bff;
+		color: white;
+		border: none;
+		padding: 0.5rem 1rem;
+		border-radius: 4px;
+		cursor: pointer;
+	
+		&:disabled {
+			background-color: #ccc;
+			cursor: not-allowed;
+		}
+	}
+	
+	&__page {
+		font-weight: bold;
+	}
+}
+
