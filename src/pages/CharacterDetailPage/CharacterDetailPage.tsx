@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { disneyService } from "../../services/disney-service/disney.service";
 import { Link, useParams } from "react-router-dom";
 import './CharacterDetailPage.scss'
+import CharacterDetailsCard from "../../components/CharacterDetailsCard/CharacterDetailsCard";
 
 type Character = {
 	_id: string;
@@ -15,6 +16,10 @@ type Character = {
 	sourceUrl?: string;
 };
 
+/**
+ * CharacterDetailPage shows info for a specific character by ID.
+ * Displays name, image, films, allies, and enemies.
+ */
 const CharacterDetailPage = () => {
 	const { id } = useParams<{ id: string }>();
 	const [character, setCharacter] = useState<Character | null>();
@@ -29,9 +34,7 @@ const CharacterDetailPage = () => {
 				setLoading(true);
 				setError("");
 
-				const response = await disneyService.getCharacterById(id);
-				console.log(response.data);
-				
+				const response = await disneyService.getCharacterById(id);				
 				setCharacter(response.data);
 			} catch (error) {
 				setError("Failed to load Character");
