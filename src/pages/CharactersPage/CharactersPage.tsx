@@ -60,25 +60,24 @@ const CharactersPage = () => {
 
 	return (
 		<main className="characters-page">
-			<h1 className="characters-page__title">
-				Disney Character Explorer
-			</h1>
+			<h1 className="characters-page__title">Disney Character Explorer</h1>
 			<p className="characters-page__blurb">
 				Browse thousands of Disney characters, from timeless classics to modern
 				heroes. Click on any character to learn more about their story,
 				appearances, and connections!
 			</p>
 			<CharacterList characters={characters} />
+			<div className="characters-page__loading-container">
+				{loading && <p className="characters-page__loading">Loading...</p>}
+				{error && <p className="characters-page__error">{error}</p>}
+			</div>
 			<PaginationControls
 				page={page}
 				totalPages={totalPages}
 				onNext={handleNext}
 				onPrev={handlePrevious}
+				loading={loading}
 			/>
-
-
-			{loading && <p className="characters-page__loading">Loading...</p>}
-			{error && <p className="characters-page__error">{error}</p>}
 		</main>
 	);
 };
