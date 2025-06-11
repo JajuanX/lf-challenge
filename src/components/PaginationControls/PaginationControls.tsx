@@ -5,6 +5,7 @@ type Props = {
 	totalPages: number | null;
 	onNext: () => void;
 	onPrev: () => void;
+	loading: boolean;
 };
 
 /**
@@ -16,13 +17,13 @@ type Props = {
  * @param {Function} props.onPrev - Callback for the Previous button.
  */
 
-const PaginationControls = ({ page, totalPages, onNext, onPrev }: Props) => {
+const PaginationControls = ({ page, totalPages, onNext, onPrev, loading }: Props) => {
 	return (
 		<nav className="pagination">
 			<button
 				className="pagination__button"
 				onClick={onPrev}
-				disabled={page === 1}
+				disabled={page <= 1 || loading}
 			>
 				Previous
 			</button>
@@ -30,7 +31,7 @@ const PaginationControls = ({ page, totalPages, onNext, onPrev }: Props) => {
 			<button
 				className="pagination__button"
 				onClick={onNext}
-				disabled={totalPages ? page >= totalPages : false}
+				disabled={!!totalPages && page >= totalPages || loading}
 			>
 				Next
 			</button>

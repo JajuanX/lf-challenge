@@ -1,7 +1,8 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .character-card {
 	width: 10rem;
+	height: 12rem;
 	flex-shrink: 0;
 	background-color: #fff;
 	border: 1px solid #ddd;
@@ -9,6 +10,9 @@
 	padding: $gap-md;
 	border-radius: $radius-sm;
 	transition: transform 0.2s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
 	&:hover {
 		transform: translateY(-4px);
@@ -17,28 +21,35 @@
 	&__link {
 		text-decoration: none;
 		color: inherit;
-		display: block;
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 	}
 
 	&__image {
 		width: 100%;
-		height: 160px;
+		height: 8rem;
 		object-fit: cover;
 		border-radius: $radius-sm;
 		display: block;
+		flex-shrink: 0;
 	}
 
 	&__name {
 		margin-top: 0.5rem;
 		font-size: 1rem;
 		font-weight: 600;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	&__image--placeholder {
 		width: 100%;
-		height: 10rem;
+		height: 8rem;
 		background-color: #f0f0f0;
 		border-radius: $radius-sm;
 		display: block;
+		flex-shrink: 0;
 	}
 }
