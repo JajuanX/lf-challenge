@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { disneyService } from "../../services/disney-service/disney.service";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./CharacterDetailPage.scss";
 import CharacterDetailsCard from "../../components/CharacterDetailsCard/CharacterDetailsCard";
 
