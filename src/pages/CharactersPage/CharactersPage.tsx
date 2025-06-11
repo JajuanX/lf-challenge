@@ -21,8 +21,8 @@ const CharactersPage = () => {
 	const [error, setError] = useState("");
 	const [totalPages, setTotalPages] = useState<number | null>(null);
 	const [searchParams, setSearchParams] = useSearchParams();
-	const rawPage = searchParams.get("page")
-	const pageParam = parseInt( rawPage ?? "", 10);
+	const rawPage = searchParams.get("page");
+	const pageParam = parseInt(rawPage ?? "", 10);
 	const page = Number.isNaN(pageParam) || pageParam < 1 ? 1 : pageParam;
 
 	useEffect(() => {
@@ -31,9 +31,10 @@ const CharactersPage = () => {
 			setError("");
 
 			try {
-				const response = await disneyService.getCharacters(page);				
+				const response = await disneyService.getCharacters(page);
 				setCharacters(response.data);
 				setTotalPages(response.info.totalPages);
+				window.scrollTo({ top: 0, behavior: "smooth" });
 			} catch (err) {
 				setError("Failed to load characters");
 				console.error(err);
@@ -47,28 +48,34 @@ const CharactersPage = () => {
 
 	const handleNext = () => {
 		if (totalPages && page < totalPages) {
-			setSearchParams({page: String(page + 1)});
+			setSearchParams({ page: String(page + 1) });
 		}
 	};
 
 	const handlePrevious = () => {
 		if (page > 1) {
-			setSearchParams({page: String(page - 1)});
+			setSearchParams({ page: String(page - 1) });
 		}
 	};
 
 	return (
 		<main className="characters-page">
-			<h1 className="characters-page__title">Disney Characters Page</h1>
-			
-			<PaginationControls 
+			<h1 className="characters-page__title">
+				Disney Character Explorer
+			</h1>
+			<p className="characters-page__blurb">
+				Browse thousands of Disney characters, from timeless classics to modern
+				heroes. Click on any character to learn more about their story,
+				appearances, and connections!
+			</p>
+			<CharacterList characters={characters} />
+			<PaginationControls
 				page={page}
 				totalPages={totalPages}
 				onNext={handleNext}
 				onPrev={handlePrevious}
-				/>
+			/>
 
-			<CharacterList characters={characters} />
 
 			{loading && <p className="characters-page__loading">Loading...</p>}
 			{error && <p className="characters-page__error">{error}</p>}
