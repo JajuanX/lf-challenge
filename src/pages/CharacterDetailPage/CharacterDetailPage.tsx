@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { disneyService } from "../../services/disney-service/disney.service";
-import { Link, useParams } from "react-router-dom";
-import './CharacterDetailPage.scss'
+import { Link, useNavigate, useParams } from "react-router-dom";
+import "./CharacterDetailPage.scss";
 import CharacterDetailsCard from "../../components/CharacterDetailsCard/CharacterDetailsCard";
 
 type Character = {
@@ -25,6 +25,7 @@ const CharacterDetailPage = () => {
 	const [character, setCharacter] = useState<Character | null>();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (!id) return;
@@ -34,7 +35,7 @@ const CharacterDetailPage = () => {
 				setLoading(true);
 				setError("");
 
-				const response = await disneyService.getCharacterById(id);				
+				const response = await disneyService.getCharacterById(id);
 				setCharacter(response.data);
 			} catch (error) {
 				setError("Failed to load Character");
@@ -53,9 +54,10 @@ const CharacterDetailPage = () => {
 
 	return (
 		<main className="character-detail">
-			<Link to="/characters" className="character-detail__back">
+			<button onClick={() => navigate(-1)} className="character-detail__back">
 				Back to List
-			</Link>
+			</button>
+
 			<CharacterDetailsCard character={character} />
 		</main>
 	);

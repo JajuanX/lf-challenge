@@ -1,14 +1,36 @@
+@use "../../styles/variables"  as *;
+
 .characters-page {
 	padding: 1rem;
 
 	&__title {
+		font-size: 2rem;
+		font-weight: bold;
+		color: $primary-color;
 		text-align: center;
 	}
 
-	&__loading, &__error {
+	&__blurb {
+		font-size: 1rem;
+		color: $text-color;
+		max-width: 600px;
+		margin: 1rem auto 0;
+		text-align: center;
+	}
+
+	&__loading,
+	&__error {
 		text-align: center;
 		font-weight: bold;
 		color: #d9534f;
 	}
-	
+
+	&__loading-container {
+		height: 1.2rem;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 1rem;
+	}
 }
