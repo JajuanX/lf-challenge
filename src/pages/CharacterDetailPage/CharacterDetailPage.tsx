@@ -16,44 +16,71 @@ type Character = {
 	sourceUrl?: string;
 };
 
+type State = {
+	character: Character | null;
+	loading: boolean;
+	error: string;
+};
+
 /**
  * CharacterDetailPage shows info for a specific character by ID.
  * Displays name, image, films, allies, and enemies.
  */
 const CharacterDetailPage = () => {
 	const { id } = useParams<{ id: string }>();
-	const [character, setCharacter] = useState<Character | null>();
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState("");
+	const numericId = Number(id);
 	const navigate = useNavigate();
 
+	const [state, setState] = useState<State>({
+		character: null,
+		loading: false,
+		error: "",
+	});
+
 	useEffect(() => {
-		if (!id) return;
+		if (!id || Number.isNaN(numericId)) return;
 
 		const fetchCharacter = async () => {
-			try {
-				setLoading(true);
-				setError("");
+			setState((prev) => ({ ...prev, loading: true, error: "" }));
 
-				const response = await disneyService.getCharacterById(id);
-				setCharacter(response.data);
-			} catch (error) {
-				setError("Failed to load Character");
-				console.error(error);
+			try {
+				const response = await disneyService.getCharacterById(numericId);
+
+				const data = response.data;
+				const hasNoContent =
+					(!data.films || data.films.length === 0) &&
+					(!data.tvShows || data.tvShows.length === 0) &&
+					(!data.allies || data.allies.length === 0) &&
+					(!data.enemies || data.enemies.length === 0);
+
+				if (hasNoContent) {
+					navigate("/notfound", { replace: true });
+					return;
+				}
+
+				setState((prev) => ({ ...prev, character: data }));
+			} catch (err) {
+				console.error(err);
+				setState((prev) => ({
+					...prev,
+					error: "Failed to load character",
+				}));
 			} finally {
-				setLoading(false);
+				setState((prev) => ({ ...prev, loading: false }));
 			}
 		};
 
 		fetchCharacter();
-	}, [id]);
+	}, [id, numericId, navigate]);
+
+	const { character, loading, error } = state;
 
 	if (loading) return <p className="character-detail__loading">Loading...</p>;
 	if (error) return <p className="character-detail__error">{error}</p>;
 	if (!character) return null;
 
 	return (
-		<main className="character-detail">
+		<main className="character-detail container">
 			<button onClick={() => navigate(-1)} className="character-detail__back">
 				Back to List
 			</button>

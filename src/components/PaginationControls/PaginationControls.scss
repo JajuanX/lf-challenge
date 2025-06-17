@@ -1,28 +1,36 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .pagination {
-	margin-top: 1rem;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	gap: $gap-md;
+	justify-content: center;
+	gap: 1rem;
 
-	&__button {
-		background-color: #007bff;
-		color: white;
-		border: none;
+	&__link {
+		text-decoration: none;
+		color: $primary-color;
+		font-weight: 600;
 		padding: 0.5rem 1rem;
-		border-radius: 4px;
-		cursor: pointer;
-	
-		&:disabled {
-			background-color: #ccc;
+		border: 1px solid $primary-color;
+		border-radius: $radius-sm;
+		width: 6rem;
+		text-align: center;
+
+		&:hover,
+		&:focus {
+			background-color: lighten($primary-color, 40%);
+		}
+
+		&--disabled {
+			color: #aaa;
+			border-color: #ccc;
 			cursor: not-allowed;
+			pointer-events: none;
+			background-color: #f9f9f9;
 		}
 	}
-	
+
 	&__page {
-		font-weight: bold;
+		font-weight: 500;
 	}
 }
-

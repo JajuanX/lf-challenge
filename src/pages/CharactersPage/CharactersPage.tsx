@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { disneyService } from "../../services/disney-service/disney.service";
-import "./CharactersPage.scss";
 import CharacterList from "../../components/CharacterList/CharacterList";
 import PaginationControls from "../../components/PaginationControls/PaginationControls";
-import { useSearchParams } from "react-router-dom";
+import "./CharactersPage.scss";
 
 type Character = {
 	_id: string;
@@ -11,71 +11,79 @@ type Character = {
 	imageUrl?: string;
 };
 
+type State = {
+	loading: boolean;
+	error: string;
+	characters: Character[];
+	totalPages: number | null;
+};
+
 /**
  * CharactersPage shows a paginated list of Disney characters.
  * Fetches data from the Disney API and manages pagination via query params.
  */
 const CharactersPage = () => {
-	const [characters, setCharacters] = useState<Character[]>([]);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState("");
-	const [totalPages, setTotalPages] = useState<number | null>(null);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const rawPage = searchParams.get("page");
 	const pageParam = parseInt(rawPage ?? "", 10);
 	const page = Number.isNaN(pageParam) || pageParam < 1 ? 1 : pageParam;
 
+	const [state, setState] = useState<State>({
+		loading: false,
+		error: "",
+		characters: [],
+		totalPages: null,
+	});
+
 	useEffect(() => {
 		const fetchCharacters = async () => {
-			setLoading(true);
-			setError("");
+			setState((prev) => ({ ...prev, loading: true, error: "" }));
 
 			try {
 				const response = await disneyService.getCharacters(page);
-				setCharacters(response.data);
-				setTotalPages(response.info.totalPages);
+
+				setState((prev) => ({
+					...prev,
+					characters: response.data,
+					totalPages: response.info.totalPages,
+				}));
+
 				window.scrollTo({ top: 0, behavior: "smooth" });
 			} catch (err) {
-				setError("Failed to load characters");
+				setState((prev) => ({
+					...prev,
+					error: "Failed to load characters",
+				}));
 				console.error(err);
 			} finally {
-				setLoading(false);
+				setState((prev) => ({ ...prev, loading: false }));
 			}
 		};
 
 		fetchCharacters();
 	}, [page]);
 
-	const handleNext = () => {
-		if (totalPages && page < totalPages) {
-			setSearchParams({ page: String(page + 1) });
-		}
-	};
-
-	const handlePrevious = () => {
-		if (page > 1) {
-			setSearchParams({ page: String(page - 1) });
-		}
-	};
+	const { loading, error, characters, totalPages } = state;
 
 	return (
-		<main className="characters-page">
+		<main className="characters-page container">
 			<h1 className="characters-page__title">Disney Character Explorer</h1>
 			<p className="characters-page__blurb">
 				Browse thousands of Disney characters, from timeless classics to modern
 				heroes. Click on any character to learn more about their story,
 				appearances, and connections!
 			</p>
+
 			<CharacterList characters={characters} />
+
 			<div className="characters-page__loading-container">
 				{loading && <p className="characters-page__loading">Loading...</p>}
 				{error && <p className="characters-page__error">{error}</p>}
 			</div>
+
 			<PaginationControls
 				page={page}
 				totalPages={totalPages}
-				onNext={handleNext}
-				onPrev={handlePrevious}
 				loading={loading}
 			/>
 		</main>
