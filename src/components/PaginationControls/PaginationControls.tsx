@@ -1,10 +1,9 @@
+import { Link } from "react-router-dom";
 import "./PaginationControls.scss";
 
 type Props = {
 	page: number;
 	totalPages: number | null;
-	onNext: () => void;
-	onPrev: () => void;
 	loading: boolean;
 };
 
@@ -17,24 +16,51 @@ type Props = {
  * @param {Function} props.onPrev - Callback for the Previous button.
  */
 
-const PaginationControls = ({ page, totalPages, onNext, onPrev, loading }: Props) => {
+const PaginationControls = ({
+	page,
+	totalPages,
+	loading,
+}: Props) => {
+	const isFirst = page <= 1;
+	const isLast = totalPages ? page >= totalPages : false;
+
 	return (
 		<nav className="pagination">
-			<button
-				className="pagination__button"
-				onClick={onPrev}
-				disabled={page <= 1 || loading}
-			>
-				Previous
-			</button>
+			{isFirst || loading ? (
+				<span
+					className="pagination__link pagination__link--disabled"
+					aria-disabled="true"
+				>
+					Previous
+				</span>
+			) : (
+				<Link
+					to={`/characters?page=${page - 1}`}
+					className="pagination__link"
+					aria-label="Previous Page"
+				>
+					Previous
+				</Link>
+			)}
+
 			<span className="pagination__page">Page {page}</span>
-			<button
-				className="pagination__button"
-				onClick={onNext}
-				disabled={!!totalPages && page >= totalPages || loading}
-			>
-				Next
-			</button>
+
+			{isLast || loading ? (
+				<span
+					className="pagination__link pagination__link--disabled"
+					aria-disabled="true"
+				>
+					Next
+				</span>
+			) : (
+				<Link
+					to={`/characters?page=${page + 1}`}
+					className="pagination__link"
+					aria-label="Next Page"
+				>
+					Next
+				</Link>
+			)}
 		</nav>
 	);
 };

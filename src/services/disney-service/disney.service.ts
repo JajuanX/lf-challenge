@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://api.disneyapi.dev";
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 50;
 
 export const disneyService = {
 	/**

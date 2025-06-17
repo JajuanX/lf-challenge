@@ -22,7 +22,7 @@ describe("CharacterDetailsCard", () => {
 		);
 	});
 
-	it("renders characters name and image", () => {
+	it("renders character details properly", () => {
 		render(<CharacterDetailsCard character={mockCharacter} />);
 
 		expect(screen.getByText("Films")).toBeInTheDocument();

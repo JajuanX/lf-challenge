@@ -17,7 +17,7 @@ describe('disneyService', () => {
 
 		expect(result).toEqual(mockData);
 		expect(mockedAxiosGet).toHaveBeenCalledWith(
-			'https://api.disneyapi.dev/character?page=1&pageSize=10'
+			'https://api.disneyapi.dev/character?page=1&pageSize=50'
 		)
 	})
 
